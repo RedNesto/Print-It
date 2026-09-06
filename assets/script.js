@@ -64,3 +64,11 @@ function selectCarouselSlide(index) {
 }
 
 selectCarouselSlide(0)
+
+setInterval(() => {
+	let nextIndex = selectedCarouselSlideIndex + 1
+	if (nextIndex >= slides.length) {
+		nextIndex = 0
+	}
+	selectCarouselSlide(nextIndex)
+}, 3000)
