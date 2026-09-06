@@ -18,6 +18,7 @@ const slides = [
 ]
 
 let selectedCarouselSlideIndex = 0
+let autoSlideIntervalId = null
 
 const bannerImage = document.querySelector(".banner-img")
 const bannerTagLine = document.querySelector("#banner > p")
@@ -61,14 +62,14 @@ function selectCarouselSlide(index) {
 	const slide = slides[index]
 	bannerImage.src = `assets/images/slideshow/${slide.image}`
 	bannerTagLine.innerHTML = slide.tagLine
+
+	if (autoSlideIntervalId) {
+		clearInterval(autoSlideIntervalId)
+	}
+
+	autoSlideIntervalId = setInterval(() => {
+		bannerRightArrow.click()
+	}, 3000)
 }
 
 selectCarouselSlide(0)
-
-setInterval(() => {
-	let nextIndex = selectedCarouselSlideIndex + 1
-	if (nextIndex >= slides.length) {
-		nextIndex = 0
-	}
-	selectCarouselSlide(nextIndex)
-}, 3000)
